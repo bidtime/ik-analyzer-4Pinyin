@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.wltea.ik-analyzer.4PinYin</groupId>
 	<artifactId>ik-analyzer-4PinYin</artifactId>
-	<version>1.0.0</version>
+	<version>5.5.0</version>
 	<name>IK Analyzer 4PinYin 1</name>
 	<description>A dictionary and grammar-based Chinese segmenter.</description>
     <properties>
-        <lucene.version>4.6.0</lucene.version>
+        <lucene.version>5.5.2</lucene.version>
     </properties>
     
 	<dependencies>

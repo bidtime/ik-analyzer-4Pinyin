@@ -24,7 +24,9 @@
  */
 package org.wltea4pinyin.analyzer.lucene;
 
+import java.io.IOException;
 import java.io.Reader;
+import java.io.StringReader;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.Tokenizer;
@@ -67,8 +69,6 @@ public final class IKAnalyzer4PinYin extends Analyzer{
     public void setPinyinChoose(PinyinChoose pinyinChoose) {
         this.pinyinChoose = pinyinChoose;
     }
-
-	
 	
 	/**
 	 * IK分词器Lucene  Analyzer接口实现类
@@ -101,12 +101,43 @@ public final class IKAnalyzer4PinYin extends Analyzer{
 	}
 
 	/**
+	 * 3.x
 	 * 重载Analyzer接口，构造分词组件
 	 */
+//	@Override
+//	protected TokenStreamComponents createComponents(String fieldName, final Reader in) {
+//		Tokenizer _IKTokenizer = new IKTokenizer(in , this.useSmart(), this.usePinyinChoose());
+//		return new TokenStreamComponents(_IKTokenizer);
+//	}
+
+	/**
+	 * 重载Analyzer接口，构造分词组件
+	 */
+//	@Override 4.x
+//	protected TokenStreamComponents createComponents(String fieldName, final Reader in) {
+//		Tokenizer _IKTokenizer = new IKTokenizer(in , this.useSmart());
+//		return new TokenStreamComponents(_IKTokenizer);
+//	}
+
+	/* 5.x以上
+	 * (non-Javadoc)
+	 * @see org.apache.lucene.analysis.Analyzer#createComponents(java.lang.String)
+	 */
 	@Override
-	protected TokenStreamComponents createComponents(String fieldName, final Reader in) {
-		Tokenizer _IKTokenizer = new IKTokenizer(in , this.useSmart(), this.usePinyinChoose());
-		return new TokenStreamComponents(_IKTokenizer);
+	protected TokenStreamComponents createComponents(String fieldName) {
+		Reader in = null;
+        try{
+            in = new StringReader(fieldName);
+            Tokenizer it = new IKTokenizer(in, this.useSmart(), this.usePinyinChoose());
+            return new Analyzer.TokenStreamComponents(it);
+        } finally {
+        	if (in != null) {
+        		try {
+					in.close();
+				} catch (IOException e) {
+				}
+        	}
+        }
 	}
 
 	private PinyinChoose getPinyinChoose(int type){

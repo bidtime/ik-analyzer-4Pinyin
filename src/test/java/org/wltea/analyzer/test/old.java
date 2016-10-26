@@ -47,7 +47,6 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.LockObtainFailedException;
 import org.apache.lucene.store.RAMDirectory;
-import org.apache.lucene.util.Version;
 import org.wltea4pinyin.analyzer.lucene.IKAnalyzer4PinYin;
 
 
@@ -86,7 +85,7 @@ public class old {
             directory = new RAMDirectory();  
             
             //配置IndexWriterConfig
-            IndexWriterConfig iwConfig = new IndexWriterConfig(Version.LUCENE_40 , analyzer);
+            IndexWriterConfig iwConfig = new IndexWriterConfig(analyzer);
             iwConfig.setOpenMode(OpenMode.CREATE_OR_APPEND);
             iwriter = new IndexWriter(directory , iwConfig);
             //写入索引
@@ -107,7 +106,7 @@ public class old {
             
             String keyword = "suanfa";            
             //使用QueryParser查询分析器构造Query对象
-            QueryParser qp = new QueryParser(Version.LUCENE_40, fieldName,  new IKAnalyzer4PinYin(true));
+            QueryParser qp = new QueryParser(fieldName, new IKAnalyzer4PinYin(true));
             Query query = qp.parse(keyword);
             System.out.println("Query = " + query);
             

@@ -97,7 +97,7 @@ public class LuceneIndexAndSearchDemo {
 			directory = new RAMDirectory();	 
 			
 			//配置IndexWriterConfig
-			IndexWriterConfig iwConfig = new IndexWriterConfig(Version.LUCENE_40 , wrapper);
+			IndexWriterConfig iwConfig = new IndexWriterConfig(wrapper);
 			iwConfig.setOpenMode(OpenMode.CREATE_OR_APPEND);
 			iwriter = new IndexWriter(directory , iwConfig);
 			//写入索引
@@ -121,9 +121,9 @@ public class LuceneIndexAndSearchDemo {
 			String keyword = "工具";			
 			//使用QueryParser查询分析器构造Query对象
 			Analyzer analyzer = new IKAnalyzer4PinYin(true);
-            QueryParser qp = new QueryParser(Version.LUCENE_40, fieldName,  analyzer);
-            QueryParser qpQuanpin = new QueryParser(Version.LUCENE_40, quanpin,  analyzer);
-            QueryParser qpShouzimu = new QueryParser(Version.LUCENE_40, shouzimu,  analyzer);
+            QueryParser qp = new QueryParser(fieldName,  analyzer);
+            QueryParser qpQuanpin = new QueryParser(quanpin,  analyzer);
+            QueryParser qpShouzimu = new QueryParser(shouzimu,  analyzer);
           
             Query query = qp.parse(keyword);
             Query queryQuanpin = qpQuanpin.parse(keyword);
