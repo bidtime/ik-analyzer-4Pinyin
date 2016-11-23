@@ -140,7 +140,7 @@ public class LuceneIndexAndSearchDemo {
 //			System.out.println("innerbq = " + innerbq);
 
 			//搜索相似度最高的5条记录
-			TopDocs topDocs = isearcher.search(innerbq , 5);
+			TopDocs topDocs = isearcher.search(innerbq, 5);
 			System.out.println("命中：" + topDocs.totalHits);
 			//输出结果
 			ScoreDoc[] scoreDocs = topDocs.scoreDocs;
