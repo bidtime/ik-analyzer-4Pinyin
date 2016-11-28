@@ -79,7 +79,7 @@ public class LuceneIndexAndSearchDemo {
         String quanpin = "pinyin";
         String shouzimu = "shouzimu";
 		 //检索内容
-		String text = "IK Analyzer是一个结合词典分词和文法分词的中文分词开源工具包。它使用了全新的正向迭代最细粒度切分算法。";
+		String text = "IK Analyzer是一个结合词典分词和文法分词的中文分词开源工具包。它使用了全新的正向迭代最细粒度切分算法。中国人会中文";
 		
 		//实例化IKAnalyzer分词器
         //使用PerFieldAnalyzerWrapper可以对不同的field使用不同的分词器
@@ -118,7 +118,7 @@ public class LuceneIndexAndSearchDemo {
 			isearcher = new IndexSearcher(ireader);			
 			
 			
-			String keyword = "工具";			
+			String keyword = "中";			
 			//使用QueryParser查询分析器构造Query对象
 			Analyzer analyzer = new IKAnalyzer4PinYin(true);
             QueryParser qp = new QueryParser(fieldName,  analyzer);
